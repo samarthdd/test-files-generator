@@ -1,0 +1,20 @@
+git+https://github.com/owasp-sbot/OSBot-Utils.git
+fastapi-offline
+python-dotenv
+pydantic
+requests
+starlette == 0.13.6
+urllib3
+uvicorn
+wheel
+
+# for testing
+coveralls
+pytest
+pytest-cov
+
+# needed for file generator
+fpdf
+xlsxwriter
+python-docx
+Pillow
