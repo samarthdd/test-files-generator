@@ -3,6 +3,8 @@ Util to create a large amount of test files
 
 # Usage
 
+- Create virtualenv
+
 - Run `pip install -r requirements.txt`
 
 - Run `export PYTHONPATH=.`
