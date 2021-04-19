@@ -6,7 +6,7 @@ requests
 starlette == 0.13.6
 urllib3
 uvicorn
-wheel
+
 
 # for testing
 coveralls
