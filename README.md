@@ -9,6 +9,9 @@ Util to create a large amount of test files
 
 - Run `export PYTHONPATH=.`
 
-- Run python api/Server.py
+- Copy `.env.sample` to `.env` and configure `FILE_GENERATOR_LOCATION` path 
+
+- Run `python api/Server.py`
 
 - Opne API in `http://localhost:8881/docs/`
+
