@@ -7,14 +7,15 @@ starlette == 0.13.6
 urllib3
 uvicorn
 
+# needed for file generator
+fpdf
+xlsxwriter
+Pillow
+lxml
+python-docx
 
 # for testing
 coveralls
 pytest
 pytest-cov
 
-# needed for file generator
-fpdf
-xlsxwriter
-python-docx
-Pillow
