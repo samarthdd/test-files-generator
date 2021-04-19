@@ -15,3 +15,5 @@ Util to create a large amount of test files
 
 - Opne API in `http://localhost:8881/docs/`
 
+- Supported_types : `[ txt, pdf, docx, xlsx, jpg, jpeg, png, gif ]`
+

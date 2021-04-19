@@ -31,7 +31,7 @@ class Server:
         uvicorn.run("api.Server:app", host=self.host, port=self.port, log_level=self.log_level, reload=self.reload)
 
 tags_metadata = [
-    {"name": "File Generator", "description": "Tool to generate files"},
+    {"name": "File Generator", "description": "Supported_types : [ txt, pdf, docx, xlsx, jpg, jpeg, png, gif ]"},
 ]
 
 # we need to do this here so that when unicorn reload is enabled the "cdr_plugin_folder_to_folder.api.Server:app" has an fully setup instance of the Server object
