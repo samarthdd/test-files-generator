@@ -6,6 +6,7 @@ from fastapi_offline import FastAPIOffline as FastAPI
 from osbot_utils.utils.Misc import to_int
 
 from api.routes.File_Generator import router as router_file_generator
+from api.routes.Polyglot_Generator import router as router_polyglot_generator
 
 class Server:
 
@@ -24,6 +25,7 @@ class Server:
 
     def setup(self):
         self.app.include_router(router_file_generator   )
+        self.app.include_router(router_polyglot_generator)
         self.fix_logging_bug()
         return self
 
@@ -32,6 +34,7 @@ class Server:
 
 tags_metadata = [
     {"name": "File Generator", "description": "Supported_types : [ txt, pdf, docx, xlsx, jpg, jpeg, png, gif ]"},
+    {"name": "Polyglot Generator", "description": "Supported_types : [ pdf, jpg, jpeg, png, zip ]"},
 ]
 
 # we need to do this here so that when unicorn reload is enabled the "cdr_plugin_folder_to_folder.api.Server:app" has an fully setup instance of the Server object

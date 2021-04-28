@@ -23,3 +23,4 @@ def file_generator(item: File_Details):
         return "Number of files must be greater than 0"
 
     return f"{item.num_of_files} files of type \'{item.file_type}\' are generated"
+
