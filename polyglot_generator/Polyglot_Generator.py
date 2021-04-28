@@ -14,7 +14,7 @@ class Polyglot_Generator:
     def __init__(self):
         self.config = Config()
 
-        self.supported_types_1 = [ "pdf", "jpg", "jpeg", "png" ]
+        self.supported_types_1 = ["png"]
         self.supported_types_2 = ["zip"]
 
         self.temp_folder=temp_folder()
@@ -32,12 +32,14 @@ class Polyglot_Generator:
             if ext1 in self.supported_types_1:
                 file1=self.populate_file1(ext1)
                 file2=self.populate_file2(ext2)
-                self.create_polyglot_file(file1, ext1, file2, ext2)
+                response=self.create_polyglot_file(file1, ext1, file2, ext2)
+                print(response)
 
             else:
                 file1=self.populate_file1(ext2)
                 file2=self.populate_file2(ext1)
-                self.create_polyglot_file(file1, ext2, file2, ext1)
+                response=self.create_polyglot_file(file1, ext2, file2, ext1)
+                print(response)
 
         return 1
 
@@ -72,6 +74,7 @@ class Polyglot_Generator:
         content = (str(unique_value) + "\n") * random.randint(1, 100000)
 
         ext=random.choice(self.supported_types_1)
+        ext="pdf"
         path = self.temp_folder + unique_value.hex + "."+ ext
         file_creator.create(path, ext, content)
 
@@ -79,5 +82,3 @@ class Polyglot_Generator:
 
         zipfile.ZipFile(zip_path, mode='w',compression=zipfile.ZIP_DEFLATED).write(path, unique_value.hex +"." + ext)
         return zip_path
-
-
