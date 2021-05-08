@@ -40,6 +40,8 @@ jobs:
         id: extract_branch
       - name: Form tag name
         id: tagging
+        env:
+          repo_name: "samarthdd/test-files-generator"
         run: |
 
           git config user.name github-actions@github.com
@@ -53,7 +55,7 @@ jobs:
           if [ -z "$tags" ]; then
             latest_tag="v0.0.0"
           else
-            latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1))
+            latest_tag=$(curl -sL https://api.github.com/repos/$repo_name/releases/latest | jq -r ".tag_name")
           fi
           
           echo "previous latest tag : $latest_tag"
