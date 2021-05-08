@@ -81,7 +81,7 @@ jobs:
               prerelease=true
               echo $branch
               if [ -z "$minor" ]; then
-                 minor=0
+                 minor=1
               else
                   minor=`expr $minor + 1`
               fi
