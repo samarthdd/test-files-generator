@@ -10,15 +10,10 @@ on:
       - main
       - develop
     paths-ignore:
-      - '.github/workflows/main.yml'
+      - '.github/workflows/auto_tagging.yml'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-    inputs:
-      create_new_tag:
-        description: create_new_tag?
-        required: true
-        default: 'false'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -41,11 +36,9 @@ jobs:
       - name: Form tag name
         id: tagging
         run: |
-
           git config user.name github-actions@github.com
           git config user.email github-actions
           git config --global http.postBuffer 1048576000
-
           git fetch --tags
           
           tags=$(git tag -l)
@@ -54,17 +47,15 @@ jobs:
             latest_tag="v0.0.0"
           else
             repo_name=$(git config --get remote.origin.url | sed 's/.*\/\([^ ]*\/[^.]*\).*/\1/')
-            latest_tag=$(curl -sL https://api.github.com/repos/$repo_name/releases/latest | jq -r ".tag_name")
+            latest_tag=$(curl -sL https://api.github.com/repos/$repo_name/releases | jq -r ".[0].tag_name")
           fi
           
           echo "previous latest tag : $latest_tag"
           version=`echo $latest_tag| cut -d. -f1`
           major=`echo $latest_tag | cut -d. -f2`
           minor=`echo $latest_tag | cut -d. -f3`
-
           branch=${{ steps.extract_branch.outputs.branch }}
           prerelease=false
-
           if [[ $branch == 'main' &&  "${{ github.event.inputs.create_new_tag }}" == "true" ]] ; then
             version=${version#"v"}
             version=`expr $version + 1`
@@ -72,8 +63,8 @@ jobs:
             minor=0
             version=v${version}
             echo $version
-
           elif [ $branch == 'main' ]; then
+            prerelease=true
             minor=0
             major=`expr $major + 1`
             
@@ -86,13 +77,10 @@ jobs:
                   minor=`expr $minor + 1`
               fi
           fi
-
           tag_name=$version.$major.$minor
           echo "new tag is : $tag_name"
-
           echo ::set-output name=prerelease::$prerelease
           echo ::set-output name=tag_id::$tag_name
-
       - name: Release snapshot
         id: release-snapshot
         uses: actions/create-release@latest
