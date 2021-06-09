@@ -1,7 +1,8 @@
 # This is a basic workflow to help you get started with Actions
 
 name: Auto tagging and release
-
+description : auto tagging and label creation on PR
+author: Samarth
 # Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
