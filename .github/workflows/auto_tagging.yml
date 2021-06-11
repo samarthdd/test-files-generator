@@ -26,8 +26,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         with:
-          token: ${{secrets.GITHUB_TOKEN}}
-          submodules: recursive
+          token: ${{secrets.GITHUBPAT}}
       - name: Extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
@@ -84,7 +83,7 @@ jobs:
         id: release-snapshot
         uses: actions/create-release@latest
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUBPAT }}
         with:
           tag_name: ${{ steps.tagging.outputs.tag_id }}
           release_name: ${{ steps.tagging.outputs.tag_id }}
